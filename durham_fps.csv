@@ -1,7 +1,0 @@
-id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_illness,threat_level,flee,body_camera
-805,La'vante Trevon Biggs,2015-09-05,shot,toy weapon,21.0,M,B,Durham,NC,True,attack,Not fleeing,False
-2067,Frank Nathaniel Clark,2016-11-22,shot,undetermined,34.0,M,B,Durham,NC,False,undetermined,Not fleeing,False
-2329,Willard Eugene Scott,2017-02-12,shot,gun,31.0,M,B,Durham,NC,False,other,Other,False
-2342,Kenneth Lee Bailey,2017-02-15,shot,gun,24.0,M,B,Durham,NC,False,attack,Foot,False
-3937,Shaun Jeffery Christy,2018-08-09,shot,gun,37.0,M,W,Durham,NC,True,attack,Not fleeing,True
-4669,Ondrae Levado Hutchinson,2019-03-30,shot and Tasered,gun,30.0,M,B,Durham,NC,False,attack,Foot,True

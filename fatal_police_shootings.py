@@ -2,7 +2,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 import seaborn as sas
 
-df = pd.read_csv('fatal-police-shootings-data.csv')
+df = pd.read_csv('csv_files/law_order/fatal-police-shootings-data.csv')
 # pd.options.display.max_columns = 50
 print(len(df.armed.unique()))
 #
