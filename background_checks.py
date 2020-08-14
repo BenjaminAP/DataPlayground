@@ -9,11 +9,14 @@ years_months_list = firearm_background_checks.month.str.split('-', expand=True)
 firearm_background_checks['year'] = years_months_list[0]
 firearm_background_checks['month'] = years_months_list[1]
 
-puerto_rico = firearm_background_checks[firearm_background_checks.state == "Puerto Rico"]
+puerto_rico = pd.read_csv('puerto_rico_gun_background_check.csv')
+
+puerto_rico_2018 = puerto_rico[puerto_rico.year == 2018]
+print(puerto_rico_2018.id.count())
 
 sas.barplot(
-    data=puerto_rico,
-    x='year',
+    data=puerto_rico_2018,
+    x='month',
     y='handgun'
 )
 
