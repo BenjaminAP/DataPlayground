@@ -2,7 +2,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 import seaborn as sns
 
-df_twitch_stream = pd.read_csv('csv_files/twitch/stream.csv')
+df_twitch_stream = pd.read_csv('csv_files/twitch/cleaner_twitch_stream.csv')
 df_twitch_chat = pd.read_csv('csv_files/twitch/chat.csv')
 
 
@@ -57,20 +57,41 @@ def pie_chart_lol_views_per_country():
 
 # US viewers at different hours of the day on January 1st, 2015
 
-date_times = df_twitch_stream.time.str.split(pat=' ', expand=True)
-
+# date_times = df_twitch_stream.time.str.split(pat=' ', expand=True)
+#
 # df_date = date_times[0]
 # date = {'year': pd.DatetimeIndex(df_date).year,
 #         'month': pd.DatetimeIndex(df_date).month,
 #         'day': pd.DatetimeIndex(df_date).day}
 # date = pd.DataFrame(data=date)
+#
+# for key, date_unit in date.items():
+#     df_twitch_stream[key] = date_unit
+#
+# df_time = date_times[1]
+# time = {'hour': pd.DatetimeIndex(df_time).hour,
+#         'min': pd.DatetimeIndex(df_time).minute,
+#         'sec': pd.DatetimeIndex(df_time).second}
+# time = pd.DataFrame(data=time)
+#
+# df_twitch_stream['hour'] = time.hour
+#
+# for key, time_unit in time.items():
+#     df_twitch_stream[key] = time_unit
+# df_twitch_stream.to_csv('cleaner_twitch_stream.csv', index=False)
+jan_15_2015 = df_twitch_stream[(df_twitch_stream.year == 2015) &
+                               (df_twitch_stream.month == 1) &
+                               (df_twitch_stream.day == 1)]
+views_per_hour = jan_15_2015.groupby('hour').hour.agg('count').to_frame('views').reset_index()
+views_per_hour.sort_values(by='hour', ascending=True, inplace=True, ignore_index=True)
+print(views_per_hour)
 
-df_time = date_times[1]
-time = {'hour': pd.DatetimeIndex(df_time).hour,
-        'min': pd.DatetimeIndex(df_time).minute,
-        'sec': pd.DatetimeIndex(df_time).second}
-time = pd.DataFrame(data=time)
+ax = plt.subplot()
+plt.title("Views per Hour")
+ax.set_xticks(range(len(views_per_hour.hour)))
+ax.set_xticklabels(views_per_hour.hour)
+plt.plot(views_per_hour.hour, views_per_hour.views)
+plt.xlabel('hour')
+plt.ylabel('views')
 
-df_twitch_stream['hour'] = time.hour
-
-print()
+plt.show()
