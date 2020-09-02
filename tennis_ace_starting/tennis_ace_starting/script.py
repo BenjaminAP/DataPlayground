@@ -32,26 +32,32 @@ plt.clf()
 # plt.scatter(df.Player, df.BreakPointsOpportunities)
 # plt.xticks(rotation=90)
 
-fsr_points_won = df[['FirstServeReturnPointsWon']]
-winning = df[['Winnings']]
+fsr_points_won = df.FirstServeReturnPointsWon.values.reshape(-1, 1)
+winning = df.Winnings
+#
+# plt.subplot(2, 1, 1)
+# plt.scatter(fsr_points_won, winning)
 
 fsr_points_won_train, fsr_points_won_test, winning_train, winning_test = train_test_split(fsr_points_won, winning, train_size=.8)
+
+plt.subplot(2, 1, 1)
+plt.scatter(fsr_points_won_train, winning_train, alpha=.4)
 
 model = LinearRegression()
 model.fit(fsr_points_won_train, winning_train)
 
-model.score(fsr_points_won_test, winning_test)
+win_predictions = model.predict(fsr_points_won_train)
+plt.plot(fsr_points_won_train, win_predictions)
 
 prediction = model.predict(fsr_points_won_test)
 
-plt.subplot(2, 1, 1)
-plt.scatter(winning_test, prediction, alpha=.7)
+
 plt.subplot(2, 1, 2)
-plt.scatter(fsr_points_won_twinning_trinrain, winning_train, alpha=.4)
+plt.scatter(winning_test, prediction, alpha=.7)
+
 
 plt.show()
 
-plt.show()
 
 
 
